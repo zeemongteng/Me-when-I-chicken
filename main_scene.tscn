@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=3 uid="uid://b40liyrsac6lj"]
+
+[ext_resource type="PackedScene" uid="uid://db6dfdvhbf04q" path="res://player.tscn" id="1_0f027"]
+[ext_resource type="Script" uid="uid://dvacgajpxee4i" path="res://main_scene.gd" id="1_gyfs4"]
+[ext_resource type="PackedScene" uid="uid://b2nxxps3b2dg5" path="res://weapon.tscn" id="2_2c62f"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o3jxj"]
+friction = 0.0
+rough = true
+bounce = 8.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0f027"]
+size = Vector3(100, 0.05, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c62f"]
+metallic = 1.0
+metallic_specular = 1.0
+rim_enabled = true
+rim = 0.21
+
+[sub_resource type="BoxMesh" id="BoxMesh_2c62f"]
+material = SubResource("StandardMaterial3D_2c62f")
+size = Vector3(100, 0.05, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0f027"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_2c62f"]
+material = SubResource("StandardMaterial3D_0f027")
+text = "WASD to move
+
+Hold SPACE to jump higher
+
+Good Luck"
+
+[sub_resource type="Curve3D" id="Curve3D_0f027"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -49.9146, 0.157409, -48.8466, 0, 0, 0, 0, 0, 0, 48.6137, 0.154633, -48.4485, 0, 0, 0, 0, 0, 0, 48.5237, -0.158379, 49.5714, 0, 0, 0, 0, 0, 0, -49.6345, -0.158073, 49.4471),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_gyfs4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_o3jxj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032425, 0.0458471, 0.030249)
+visible = false
+shape = SubResource("BoxShape3D_0f027")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000741243, 0.00521243, 0.0122625)
+mesh = SubResource("BoxMesh_2c62f")
+skeleton = NodePath("../..")
+
+[node name="TextMesh" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, 10, 0, -10, -4.37114e-07, -0.0370808, -0.143463, 0.101572)
+mesh = SubResource("TextMesh_2c62f")
+
+[node name="Node3D" parent="." instance=ExtResource("1_0f027")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 211.184, 0)
+
+[node name="SpawnPath" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.799726, 0.769391, -0.231453)
+curve = SubResource("Curve3D_0f027")
+
+[node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
+transform = Transform3D(-0.00404045, 2.8174e-05, -0.999976, 9.09481e-13, 0.999996, 2.81739e-05, 0.999977, 1.13838e-07, -0.00404045, -49.9146, 0.157409, -48.8466)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.999998, 0.00188849, 0.000121643, -0.000126435, 0.00252934, 0.999997, 0.00188817, -0.999995, 0.00252957, 0, 26.9135, 0)
+light_energy = 0.7
+light_angular_distance = 1.2
+light_specular = 1.98
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_fade_start = 0.46
+
+[node name="weapon" parent="." instance=ExtResource("2_2c62f")]
+transform = Transform3D(-0.0307305, 0, 0.999528, 0, 1, 0, -0.999528, 0, -0.0307305, 69.4003, -7.35531, 0)

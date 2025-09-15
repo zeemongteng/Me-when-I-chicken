@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhcpkqpgbw26k"]
+
+[ext_resource type="PackedScene" uid="uid://b6whiddemwnhf" path="res://bullet/low_poly_bullet.glb" id="1_v7oki"]
+[ext_resource type="Script" uid="uid://7e8l0vya186d" path="res://bullet.gd" id="1_v8qja"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7oki"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.580392, 0, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v8qja"]
+radius = 1.24123
+height = 6.117
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v7oki"]
+radius = 1.11682
+height = 5.69324
+
+[node name="bullet" type="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 0
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+motion_mode = 1
+slide_on_ceiling = false
+wall_min_slide_angle = 3.14159
+floor_stop_on_slope = false
+floor_block_on_wall = false
+safe_margin = 0.01
+script = ExtResource("1_v8qja")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_v7oki")]
+transform = Transform3D(-167, 0, -1.45996e-05, 0, 167, 0, 1.45996e-05, 0, -167, 1.64569, 0, -0.000353098)
+
+[node name="Object_5" parent="Sketchfab_Scene/Sketchfab_model/root/GLTF_SceneRootNode/Zylinder_2" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_v7oki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.0151314, 0.999885, 0, -0.999885, -0.0151314, 0, 0, 0, 1, 0.485421, 0, 0)
+shape = SubResource("CapsuleShape3D_v8qja")
+
+[node name="Hitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9223, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 6.65148, 0.0411198, 0)
+shape = SubResource("CapsuleShape3D_v7oki")
+
+[editable path="Sketchfab_Scene"]
