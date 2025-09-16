@@ -117,13 +117,18 @@ func stop_shake():
 func on_hit(attack: Attack):
 	mesh.visible = false
 	
+	var collision_shape = $Hurtbox/CollisionShape3D
+	if collision_shape:
+		collision_shape.disabled = true
+	
 	var _ragdoll = ragdoll.duplicate(true)
 	var dir = (global_transform.origin - attack.position).normalized()
 	add_child(_ragdoll)
 	_ragdoll.apply_central_impulse(dir * 80 + Vector3.UP * 95.0)
 	_ragdoll.add_to_group("ragdoll") 
 	var spin_axis = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	_ragdoll.apply_torque_impulse(spin_axis * 20.0) # tweak 20.0 for more/less spin
+	_ragdoll.apply_torque_impulse(spin_axis * 50.0)
 	cam.shake(0.1, 3)
+	
 	
 	is_dead = true
