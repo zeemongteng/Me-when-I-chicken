@@ -1,7 +1,7 @@
-class_name Hitbox 
+class_name Hurtbox 
 extends Area3D
 
-signal damaged()
+signal damaged(attack: Attack)
 
-func damage():
-	damaged.emit()
+func damage(attack: Attack):
+	damaged.emit(attack)

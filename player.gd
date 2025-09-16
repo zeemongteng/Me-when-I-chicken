@@ -13,6 +13,7 @@ class_name Player
 @onready var effect_anim: AnimationPlayer = $EffectPlayer
 @onready var mesh: Node3D = $Pivot
 @onready var explosion = $Particles
+@onready var ragdoll = preload("res://ragdoll.tscn").instantiate()
 
 var charge_time: float = 0.0
 var is_charging: bool = false
@@ -109,6 +110,14 @@ func stop_shake():
 	is_shaking = false
 	mesh.transform.origin = original_position
 
-func on_hit():
-	#dead
-	pass
+func on_hit(attack: Attack):
+	mesh.visible = false
+	
+	var _ragdoll = ragdoll.duplicate(true)
+	var dir = (global_transform.origin - attack.position).normalized()
+	add_child(_ragdoll)
+	_ragdoll.apply_central_impulse(dir * 80 + Vector3.UP * 95.0)
+	
+	var spin_axis = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)).normalized()
+	_ragdoll.apply_torque_impulse(spin_axis * 20.0) # tweak 20.0 for more/less spin
+	
