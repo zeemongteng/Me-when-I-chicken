@@ -45,10 +45,13 @@ func shoot() -> void:
 	get_tree().current_scene.add_child(bullet)
 	bullet.global_position = bulletspawner.global_position
 
-	# direction toward player (with Y difference this time, so bullet travels correctly)
-	var shoot_dir = -pivot.transform.basis.x.normalized()
+	# Get pivot's forward direction (negative Z)
+	var shoot_dir = -pivot.transform.basis.z.normalized()
 
-	bullet.velocity = shoot_dir * bullet_speed 
-	bullet.rotation = shoot_dir
+	# Apply velocity to bullet
+	bullet.velocity = shoot_dir * bullet_speed
+
+	# Make bullet face the same direction as the pivot
+	bullet.look_at(bullet.global_position + shoot_dir, Vector3.UP)
 
 	anim.play("shoot")

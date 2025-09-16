@@ -78,6 +78,10 @@ shadow_mesh = SubResource("ArrayMesh_vnjwt")
 albedo_color = Color(0, 1, 1, 0.0666667)
 emission = Color(1, 0, 0, 1)
 emission_energy_multiplier = 0.3
+disable_receive_shadows = true
+shadow_to_opacity = true
+distance_fade_mode = 2
+distance_fade_max_distance = 30.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_o2wld"]
 material = SubResource("StandardMaterial3D_swcir")
@@ -313,8 +317,9 @@ skeleton = NodePath("")
 [node name="Pivot" type="Node3D" parent="Cannon_1"]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0.952771, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cannon_1/Pivot"]
-transform = Transform3D(-0.01, -1.74845e-09, 8.74227e-10, -8.74228e-10, 4.37114e-10, -0.00999999, 1.74846e-09, -0.00999999, -4.37114e-10, 3.60598e-05, 0.00283604, -0.277665)
+[node name="Pointer" type="MeshInstance3D" parent="Cannon_1/Pivot"]
+transform = Transform3D(-0.01, -1.74845e-09, 8.74227e-10, -8.74228e-10, 4.37114e-10, -0.00999998, 1.74846e-09, -0.00999998, -4.37114e-10, -6.89552e-05, 0.0030793, -0.275473)
+transparency = 0.9
 mesh = SubResource("CapsuleMesh_o2wld")
 skeleton = NodePath("../Cannon_1_Gun/BulletSpawner")
 
@@ -324,7 +329,7 @@ mesh = SubResource("ArrayMesh_0ouag")
 skeleton = NodePath("")
 
 [node name="BulletSpawner" type="Node3D" parent="Cannon_1/Pivot/Cannon_1_Gun"]
-transform = Transform3D(0.01, 3.30872e-24, -1.44629e-31, 0, -4.37114e-10, -0.01, -3.30872e-24, 0.01, -4.37114e-10, 3.7835e-10, -0.00256529, 0.00286197)
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 3.7835e-10, -0.00256529, 0.00286197)
 
 [node name="Cannon_1_Mid" type="MeshInstance3D" parent="Cannon_1"]
 transform = Transform3D(100, 0, 0, 0, -0.000361999, 100, 0, -100, -0.000361999, 0, 0, 0)

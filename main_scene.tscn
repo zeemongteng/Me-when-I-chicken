@@ -79,5 +79,17 @@ shadow_enabled = true
 directional_shadow_mode = 1
 directional_shadow_fade_start = 0.46
 
-[node name="weapon" parent="." instance=ExtResource("2_2c62f")]
-transform = Transform3D(-0.0307305, 0, 0.999528, 0, 1, 0, -0.999528, 0, -0.0307305, 69.4003, -7.35531, 0)
+[node name="Weapon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 65.3965)
+
+[node name="weapon" parent="Weapon" instance=ExtResource("2_2c62f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.4003, -7.35531, -65.3965)
+
+[node name="weapon2" parent="Weapon" instance=ExtResource("2_2c62f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.177, -7.355, -134.764)
+
+[node name="weapon3" parent="Weapon" instance=ExtResource("2_2c62f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.91671, -7.35501, 7.04428)
+
+[node name="weapon4" parent="Weapon" instance=ExtResource("2_2c62f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.197, -7.355, -64.984)

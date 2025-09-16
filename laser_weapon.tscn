@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwi7dxgrcemrw"]
+
+[ext_resource type="PackedScene" uid="uid://b2nxxps3b2dg5" path="res://weapon.tscn" id="1_5b4l8"]
+
+[node name="weapon" instance=ExtResource("1_5b4l8")]

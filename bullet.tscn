@@ -33,20 +33,20 @@ safe_margin = 0.01
 script = ExtResource("1_v8qja")
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("1_v7oki")]
-transform = Transform3D(-167, 0, -1.45996e-05, 0, 167, 0, 1.45996e-05, 0, -167, 1.64569, 0, -0.000353098)
+transform = Transform3D(-7.2998e-06, 0, 167, 0, 167, 0, -167, 0, -7.2998e-06, 0, 0, 0)
 
 [node name="Object_5" parent="Sketchfab_Scene/Sketchfab_model/root/GLTF_SceneRootNode/Zylinder_2" index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_v7oki")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-0.0151314, 0.999885, 0, -0.999885, -0.0151314, 0, 0, 0, 1, 0.485421, 0, 0)
+transform = Transform3D(1.91068e-15, -4.37114e-08, 1, -0.999999, -4.37114e-08, 0, 4.37114e-08, -0.999999, -4.37114e-08, -0.0135695, 0, -1.04301)
 shape = SubResource("CapsuleShape3D_v8qja")
 
 [node name="Hitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9223, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 6.65148, 0.0411198, 0)
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 5.78714, -0.162851, -0.922079)
 shape = SubResource("CapsuleShape3D_v7oki")
 
 [editable path="Sketchfab_Scene"]
