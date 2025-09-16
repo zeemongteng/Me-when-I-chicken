@@ -286,10 +286,8 @@ _data = {
 &"shoot": SubResource("Animation_swcir")
 }
 
-[node name="weapon" type="Node3D" node_paths=PackedStringArray("bulletspawner", "pivot")]
+[node name="weapon" type="Node3D"]
 script = ExtResource("1_o2wld")
-bulletspawner = NodePath("Cannon_1/Pivot/Cannon_1_Gun/BulletSpawner")
-pivot = NodePath("Cannon_1/Pivot")
 
 [node name="Cannon_1" type="Node3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -0.227051, -0.00012207, -1.20837)

@@ -9,6 +9,7 @@ class_name Player
 @export var SHAKE_STRENGTH = 0.25
 @export var FALL_TRESHOLD: float = 60
 
+@onready var cam = $Camera3D
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var effect_anim: AnimationPlayer = $EffectPlayer
 @onready var mesh: Node3D = $Pivot
@@ -20,12 +21,15 @@ var is_charging: bool = false
 var original_position: Vector3
 var is_shaking: bool = false
 var previous_y_velocity: float = 0.0
+var is_dead := false
 
 func _ready() -> void:
 	original_position = mesh.transform.origin
 	# Ensure charge anim does not loop in editor, or it will restart each frame
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta * 10
@@ -117,7 +121,9 @@ func on_hit(attack: Attack):
 	var dir = (global_transform.origin - attack.position).normalized()
 	add_child(_ragdoll)
 	_ragdoll.apply_central_impulse(dir * 80 + Vector3.UP * 95.0)
-	
+	_ragdoll.add_to_group("ragdoll") 
 	var spin_axis = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	_ragdoll.apply_torque_impulse(spin_axis * 20.0) # tweak 20.0 for more/less spin
+	cam.shake(0.1, 3)
 	
+	is_dead = true

@@ -61,9 +61,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ye125")
 
-[node name="Ragdoll" type="RigidBody3D"]
-collision_layer = 2
-collision_mask = 2
+[node name="Ragdoll" type="RigidBody3D" groups=["ragdoll"]]
+collision_layer = 6
+collision_mask = 6
 physics_material_override = SubResource("PhysicsMaterial_i0bs4")
 gravity_scale = 3.438
 

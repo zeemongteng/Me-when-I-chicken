@@ -1,7 +1,11 @@
-[gd_scene load_steps=17 format=4 uid="uid://5ci081adyho1"]
+[gd_scene load_steps=19 format=4 uid="uid://5ci081adyho1"]
 
 [ext_resource type="Texture2D" uid="uid://kypth6quae0g" path="res://Low Poly Cars Pack 1/Blends/CarTexture.png" id="1_7k104"]
+[ext_resource type="Script" uid="uid://b20my53tpxeg5" path="res://enemy.gd" id="1_qi2p4"]
 [ext_resource type="Script" uid="uid://cpdfmnm7g8xh6" path="res://hitbox.gd" id="2_4gyqm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qi2p4"]
+friction = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gyqm"]
 albedo_texture = ExtResource("1_7k104")
@@ -127,41 +131,47 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_jq0as")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hb8ge"]
-size = Vector3(1.6803, 0.459534, 3.89758)
+size = Vector3(9.77691, 3.87688, 19.3081)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qi2p4"]
-size = Vector3(1.67476, 0.573151, 0.392578)
+size = Vector3(9.85345, 3.01411, 0.392578)
 
 [node name="enemy" type="RigidBody3D"]
 collision_layer = 2
 collision_mask = 2
-constant_force = Vector3(0, 0, 1)
+mass = 20.0
+physics_material_override = SubResource("PhysicsMaterial_qi2p4")
+gravity_scale = 2.004
+script = ExtResource("1_qi2p4")
 
-[node name="BackWheels" type="MeshInstance3D" parent="."]
-transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, -0.000102282, -0.526902, -1.13687)
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(-5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 0, 3.96386, 0)
+
+[node name="BackWheels" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, -0.000102282, -0.526902, -1.13687)
 material_override = SubResource("StandardMaterial3D_4gyqm")
 mesh = SubResource("ArrayMesh_qi2p4")
 skeleton = NodePath("")
 
-[node name="FrontWheels" type="MeshInstance3D" parent="."]
-transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 0.00386, -0.529712, 1.41033)
+[node name="FrontWheels" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0.00386, -0.529712, 1.41033)
 material_override = SubResource("StandardMaterial3D_iifgy")
 mesh = SubResource("ArrayMesh_epg4t")
 skeleton = NodePath("")
 
-[node name="Car" type="MeshInstance3D" parent="."]
-transform = Transform3D(-63.082, 0, 0, 0, 7.51996e-06, 63.082, 0, -63.082, 7.51996e-06, -0.00085783, 0.0199029, 0.00447392)
+[node name="Car" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-63.082, 0, 0, 0, 2.7574e-06, 63.082, 0, -63.082, 2.7574e-06, -0.00085783, 0.0199029, 0.00447392)
 material_override = SubResource("StandardMaterial3D_3yqyl")
 mesh = SubResource("ArrayMesh_wujgv")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.00166, 0, 0, 0, 1.00166, 0, 0, 0, 1.00166, 0.00274658, -0.270233, 0.0360718)
+transform = Transform3D(1.00166, 0, 0, 0, 1.00166, 0, 0, 0, 1.00166, 0, 1.93254, -0.103955)
 shape = SubResource("BoxShape3D_hb8ge")
 
 [node name="Hitbox" type="Area3D" parent="."]
 script = ExtResource("2_4gyqm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
-transform = Transform3D(1.00237, 0, 0, 0, 1.00237, 0, 0, 0, 1.00237, 0.0279813, -0.320786, 1.89302)
+transform = Transform3D(1.00237, 0, 0, 0, 1.00237, 0, 0, 0, 1.00237, -0.095756, 2.25931, -10.2818)
 shape = SubResource("BoxShape3D_qi2p4")

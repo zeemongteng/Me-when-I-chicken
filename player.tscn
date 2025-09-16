@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=4 uid="uid://db6dfdvhbf04q"]
+[gd_scene load_steps=23 format=4 uid="uid://db6dfdvhbf04q"]
 
 [ext_resource type="Script" uid="uid://7etfkswbk6m8" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://de8jxb15kibjj" path="res://hurtbox.gd" id="2_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://ctygckqgul2vr" path="res://Amazing Inc Chicken/ChickenTexture.png" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://wdihl7mymeru" path="res://camera_3d.gd" id="4_hqtel"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hqtel"]
 size = Vector3(1.35, 4.24, 3.17)
@@ -254,6 +255,8 @@ emission_energy_multiplier = 4.94
 material = SubResource("StandardMaterial3D_i3pqv")
 
 [node name="player" type="CharacterBody3D" groups=["player"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_onrkg")
 
 [node name="Hurtbox" type="Area3D" parent="."]
@@ -305,7 +308,10 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_onrkg")
 draw_pass_1 = SubResource("BoxMesh_hqtel")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.433895, 0.900963, 0, -0.900963, 0.433895, 0.00915623, 34.5438, 13.1244)
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906307, 0, -0.906307, 0.422618, 0, 34, 13)
+visible = false
+script = ExtResource("4_hqtel")
+player = NodePath("..")
 
 [connection signal="damaged" from="Hurtbox" to="." method="on_hit"]
