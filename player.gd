@@ -3,7 +3,7 @@ class_name Player
 
 @export var SPEED = 20
 @export var TURN_SPEED = 10
-@export var MAX_CHARGE_TIME = 1.5 # seconds to reach full charge
+@export var MAX_CHARGE_TIME = 1.5 
 @export var BASE_JUMP = 30.0
 @export var MAX_JUMP = 70.0
 @export var SHAKE_STRENGTH = 0.25
@@ -15,6 +15,8 @@ class_name Player
 @onready var mesh: Node3D = $Pivot
 @onready var explosion = $Particles
 @onready var ragdoll = preload("res://ragdoll.tscn").instantiate()
+@onready var death_screen = get_tree().root.get_node("Mainmenu/CanvasLayer/TextureRect")
+@onready var flash_ui = get_tree().root.get_node("Mainmenu/CanvasLayer/ColorRect")
 
 var charge_time: float = 0.0
 var is_charging: bool = false
@@ -25,7 +27,6 @@ var is_dead := false
 
 func _ready() -> void:
 	original_position = mesh.transform.origin
-	# Ensure charge anim does not loop in editor, or it will restart each frame
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -117,9 +118,11 @@ func stop_shake():
 func on_hit(attack: Attack):
 	mesh.visible = false
 	
-	var collision_shape = $Hurtbox/CollisionShape3D
-	if collision_shape:
-		collision_shape.disabled = true
+	var hurtbox = $Hurtbox/CollisionShape3D
+	var hitbox = $Hitbox/CollisionShape3D
+
+	hurtbox.disabled = true
+	hitbox.disabled = true
 	
 	var _ragdoll = ragdoll.duplicate(true)
 	var dir = (global_transform.origin - attack.position).normalized()
@@ -131,3 +134,7 @@ func on_hit(attack: Attack):
 	cam.shake(0.1, 3)
 	
 	is_dead = true
+	
+	await get_tree().create_timer(2).timeout
+	death_screen.show_deathscreen()
+	flash_ui.flash(3600, Color.BLACK, 0.6)

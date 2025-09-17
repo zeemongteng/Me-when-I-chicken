@@ -18,4 +18,6 @@ func start_pressed():
 	cam.shake(0.2, 5)
 	
 	await get_tree().create_timer(2).timeout
+	cam.shake(0.1, 3)
+	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_packed(main)

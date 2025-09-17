@@ -307,7 +307,7 @@ mesh = SubResource("ArrayMesh_32nbg")
 skeleton = NodePath("")
 
 [node name="Pivot" type="Node3D" parent="Cannon_1"]
-transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0.952771, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 1.093, 0)
 
 [node name="Pointer" type="MeshInstance3D" parent="Cannon_1/Pivot"]
 transform = Transform3D(-0.01, -1.74845e-09, 8.74227e-10, -8.74228e-10, 4.37114e-10, -0.00999997, 1.74846e-09, -0.00999997, -4.37114e-10, -0.00695862, 0.000937997, 0.282876)

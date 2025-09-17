@@ -167,7 +167,7 @@ collision_layer = 2
 collision_mask = 2
 mass = 20.0
 physics_material_override = SubResource("PhysicsMaterial_qi2p4")
-gravity_scale = 2.004
+gravity_scale = 5.156
 script = ExtResource("1_qi2p4")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]

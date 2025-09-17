@@ -1,11 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://b40liyrsac6lj"]
+[gd_scene load_steps=22 format=3 uid="uid://b40liyrsac6lj"]
 
 [ext_resource type="PackedScene" uid="uid://db6dfdvhbf04q" path="res://player.tscn" id="1_0f027"]
 [ext_resource type="Script" uid="uid://dvacgajpxee4i" path="res://main_scene.gd" id="1_gyfs4"]
 [ext_resource type="PackedScene" uid="uid://b2nxxps3b2dg5" path="res://weapon.tscn" id="2_2c62f"]
 [ext_resource type="PackedScene" uid="uid://bwi7dxgrcemrw" path="res://laser_weapon.tscn" id="4_8mm7a"]
 [ext_resource type="PackedScene" uid="uid://5ci081adyho1" path="res://enemy.tscn" id="4_d5x1h"]
+[ext_resource type="FontFile" uid="uid://b0q5gpw5umqs" path="res://impact.ttf" id="5_wr18j"]
 [ext_resource type="Script" uid="uid://cdbawhead2f71" path="res://kill_zone.gd" id="6_hq1ik"]
+[ext_resource type="Script" uid="uid://begaeswf6gsxy" path="res://color_rect.gd" id="7_nfk4m"]
+[ext_resource type="Texture2D" uid="uid://byv52fkk6hgwo" path="res://death2-removebg-preview.png" id="8_7ycvg"]
+[ext_resource type="Script" uid="uid://b5wolonm6hvb7" path="res://texture_rect.gd" id="9_wr18j"]
+[ext_resource type="Texture2D" uid="uid://prv8c5qmwegn" path="res://death1-removebg-preview.png" id="10_qwutr"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o3jxj"]
 friction = 0.0
@@ -33,7 +38,9 @@ text = "WASD to move
 
 Hold SPACE to jump higher
 
-Good Luck"
+Too easy? Press P!"
+font = ExtResource("5_wr18j")
+font_size = 75
 
 [sub_resource type="Curve3D" id="Curve3D_0f027"]
 closed = true
@@ -46,10 +53,25 @@ point_count = 4
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nfk4m"]
 plane = Plane(0, 5, 0, 0)
 
+[sub_resource type="Curve3D" id="Curve3D_hq1ik"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 99.5778, -7.87083, -99.5001, 0, 0, 0, 0, 0, 0, -99.5959, -7.97719, -99.7573, 0, 0, 0, 0, 0, 0, -99.8143, -7.76447, 99.1968, 0, 0, 0, 0, 0, 0, 99.6644, -7.76447, 99.4147),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_qwutr"]
+frames = 2
+frame_0/texture = ExtResource("8_7ycvg")
+frame_1/texture = ExtResource("10_qwutr")
+frame_1/duration = 1.0
+
 [node name="Mainmenu" type="Node3D"]
 script = ExtResource("1_gyfs4")
 mob_scene = ExtResource("4_d5x1h")
 spawn_interval = 1.0
+weapon_scenes = Array[PackedScene]([ExtResource("4_8mm7a"), ExtResource("2_2c62f")])
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 0, 0)
@@ -58,12 +80,12 @@ collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_o3jxj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032425, 0.0458471, 0.030249)
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.032425, 0.0458471, 0.030249)
 visible = false
 shape = SubResource("BoxShape3D_0f027")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000741243, 0.00521243, 0.0122625)
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0.000741243, 0.00521243, 0.0122625)
 mesh = SubResource("BoxMesh_2c62f")
 skeleton = NodePath("../..")
 
@@ -79,7 +101,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 curve = SubResource("Curve3D_0f027")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-0.0038909, 0.0083562, -0.999905, -4.65646e-10, 0.999937, 0.00835605, 0.999959, 3.25149e-05, -0.00389068, -94.3062, 12.5158, -98.0593)
+transform = Transform3D(-0.0038909, 0.00835618, -0.999902, -4.65646e-10, 0.999935, 0.00835603, 0.999959, 3.25148e-05, -0.00389067, -94.3062, 12.5158, -98.0593)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.999998, 0.00188849, 0.000121643, -0.000126435, 0.00252934, 0.999997, 0.00188817, -0.999995, 0.00252957, 0, 26.9135, 0)
@@ -90,24 +112,6 @@ shadow_enabled = true
 directional_shadow_mode = 1
 directional_shadow_fade_start = 0.46
 
-[node name="Weapon" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 65.396)
-
-[node name="laser_weapon" parent="Weapon" instance=ExtResource("4_8mm7a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.8178, -5.9284, 5.73389)
-
-[node name="weapon" parent="Weapon" instance=ExtResource("2_2c62f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.4003, -7.35531, -65.3965)
-
-[node name="weapon2" parent="Weapon" instance=ExtResource("2_2c62f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.177, -7.355, -134.764)
-
-[node name="weapon3" parent="Weapon" instance=ExtResource("2_2c62f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.91671, -7.35501, 7.04428)
-
-[node name="weapon4" parent="Weapon" instance=ExtResource("2_2c62f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.197, -7.355, -64.984)
-
 [node name="KillZone" type="Area3D" parent="."]
 collision_layer = 15
 collision_mask = 15
@@ -116,3 +120,41 @@ script = ExtResource("6_hq1ik")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KillZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0919991, -96.4474, -0.1492)
 shape = SubResource("WorldBoundaryShape3D_nfk4m")
+
+[node name="WeaponSpawnPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_hq1ik")
+
+[node name="WeaponSpawnLocation" type="PathFollow3D" parent="WeaponSpawnPath"]
+transform = Transform3D(0.00129123, -0.000534012, 0.999996, 2.91038e-11, 0.999999, 0.000534011, -0.999996, -6.89504e-07, 0.00129123, 99.5778, -7.87083, -99.5001)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_nfk4m")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -128.0
+offset_right = 377.0
+offset_bottom = 372.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = SubResource("AnimatedTexture_qwutr")
+stretch_mode = 3
+script = ExtResource("9_wr18j")

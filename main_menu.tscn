@@ -698,14 +698,13 @@ script = ExtResource("1_ix6bv")
 main = ExtResource("2_2kjvi")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -0.937012, -6.10352e-05, -701.988)
+transform = Transform3D(10.5309, 0, 0, 0, 10.5309, 0, 0, 0, 4.11207, -0.937012, -6.10352e-05, 165.395)
 collision_layer = 2
 collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_rhts7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.032425, 0.0458471, 0.030249)
-visible = false
 shape = SubResource("BoxShape3D_06t4h")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
@@ -794,6 +793,7 @@ shape = SubResource("BoxShape3D_swr0i")
 
 [node name="Ragdoll" parent="." instance=ExtResource("1_06t4h")]
 transform = Transform3D(-0.947898, 0.144494, 0.283921, 0.209726, 0.953889, 0.214735, -0.239801, 0.263093, -0.934493, 0, 25.249, -25.9847)
+gravity_scale = 8.0
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="Ragdoll"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0107145, 3.16808, 0.441392)
