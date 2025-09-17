@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://5ci081adyho1"]
+[gd_scene load_steps=21 format=4 uid="uid://5ci081adyho1"]
 
 [ext_resource type="Texture2D" uid="uid://kypth6quae0g" path="res://Low Poly Cars Pack 1/Blends/CarTexture.png" id="1_7k104"]
 [ext_resource type="Script" uid="uid://b20my53tpxeg5" path="res://enemy.gd" id="1_qi2p4"]
 [ext_resource type="Script" uid="uid://cpdfmnm7g8xh6" path="res://hitbox.gd" id="2_4gyqm"]
+[ext_resource type="Script" uid="uid://de8jxb15kibjj" path="res://hurtbox.gd" id="4_iifgy"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qi2p4"]
 friction = 0.4
@@ -134,7 +135,10 @@ shadow_mesh = SubResource("ArrayMesh_jq0as")
 size = Vector3(9.77691, 3.87688, 19.3081)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qi2p4"]
-size = Vector3(9.85345, 3.01411, 0.392578)
+size = Vector3(9.78065, 3.73606, 1.34839)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_epg4t"]
+size = Vector3(9.6778, 3.81656, 8.91446)
 
 [node name="enemy" type="RigidBody3D"]
 collision_layer = 2
@@ -173,5 +177,17 @@ shape = SubResource("BoxShape3D_hb8ge")
 script = ExtResource("2_4gyqm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
-transform = Transform3D(1.00237, 0, 0, 0, 1.00237, 0, 0, 0, 1.00237, -0.095756, 2.25931, -10.2818)
+transform = Transform3D(1.00237, 0, 0, 0, 1.00237, 0, 0, 0, 1.00237, 0.0117705, 1.88133, -10.4476)
 shape = SubResource("BoxShape3D_qi2p4")
+debug_color = Color(0.919115, 0.209494, 0.485325, 0.42)
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("4_iifgy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0360413, 5.95286, 0.453865)
+shape = SubResource("BoxShape3D_epg4t")
+
+[connection signal="damaged" from="Hurtbox" to="." method="on_hit"]

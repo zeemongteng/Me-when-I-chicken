@@ -1,9 +1,13 @@
-[gd_scene load_steps=23 format=4 uid="uid://db6dfdvhbf04q"]
+[gd_scene load_steps=25 format=4 uid="uid://db6dfdvhbf04q"]
 
 [ext_resource type="Script" uid="uid://7etfkswbk6m8" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://de8jxb15kibjj" path="res://hurtbox.gd" id="2_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://ctygckqgul2vr" path="res://Amazing Inc Chicken/ChickenTexture.png" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://cpdfmnm7g8xh6" path="res://hitbox.gd" id="2_sweqy"]
 [ext_resource type="Script" uid="uid://wdihl7mymeru" path="res://camera_3d.gd" id="4_hqtel"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2hs0m"]
+size = Vector3(3.28247, 6.35132, 3.53439)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hqtel"]
 size = Vector3(1.35, 4.24, 3.17)
@@ -258,6 +262,15 @@ material = SubResource("StandardMaterial3D_i3pqv")
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_onrkg")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("2_sweqy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.119151, 3.76688, 0.84031)
+shape = SubResource("BoxShape3D_2hs0m")
 
 [node name="Hurtbox" type="Area3D" parent="."]
 script = ExtResource("2_i3pqv")

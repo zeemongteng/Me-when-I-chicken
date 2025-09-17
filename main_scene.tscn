@@ -75,7 +75,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 curve = SubResource("Curve3D_0f027")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-0.0038909, 0.00835622, -0.999907, -4.65646e-10, 0.99994, 0.00835607, 0.999959, 3.2515e-05, -0.00389069, -94.3062, 12.5158, -98.0593)
+transform = Transform3D(-0.0038909, 0.00835621, -0.999906, -4.65646e-10, 0.999939, 0.00835607, 0.999959, 3.2515e-05, -0.00389069, -94.3062, 12.5158, -98.0593)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.999998, 0.00188849, 0.000121643, -0.000126435, 0.00252934, 0.999997, 0.00188817, -0.999995, 0.00252957, 0, 26.9135, 0)
@@ -87,10 +87,10 @@ directional_shadow_mode = 1
 directional_shadow_fade_start = 0.46
 
 [node name="Weapon" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 65.396)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.5974, 65.396)
 
 [node name="laser_weapon" parent="Weapon" instance=ExtResource("4_8mm7a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.8178, 0.308094, 5.73389)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.8178, -5.9284, 5.73389)
 
 [node name="weapon" parent="Weapon" instance=ExtResource("2_2c62f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.4003, -7.35531, -65.3965)
