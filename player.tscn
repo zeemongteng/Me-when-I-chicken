@@ -271,6 +271,7 @@ script = ExtResource("2_sweqy")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.119151, 3.76688, 0.84031)
 shape = SubResource("BoxShape3D_2hs0m")
+debug_color = Color(0.977717, 0, 0.401922, 0.42)
 
 [node name="Hurtbox" type="Area3D" parent="."]
 script = ExtResource("2_i3pqv")
@@ -278,6 +279,7 @@ script = ExtResource("2_i3pqv")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00770569, 4.88638, 0.948198)
 shape = SubResource("BoxShape3D_hqtel")
+debug_color = Color(0.659641, 0.514862, 0, 0.42)
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.792044, 0)

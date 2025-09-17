@@ -75,7 +75,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 curve = SubResource("Curve3D_0f027")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-0.0038909, 0.00835621, -0.999906, -4.65646e-10, 0.999939, 0.00835607, 0.999959, 3.2515e-05, -0.00389069, -94.3062, 12.5158, -98.0593)
+transform = Transform3D(-0.0038909, 0.00835621, -0.999906, -4.65646e-10, 0.999939, 0.00835606, 0.999959, 3.25149e-05, -0.00389069, -94.3062, 12.5158, -98.0593)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.999998, 0.00188849, 0.000121643, -0.000126435, 0.00252934, 0.999997, 0.00188817, -0.999995, 0.00252957, 0, 26.9135, 0)

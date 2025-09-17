@@ -63,6 +63,7 @@ script = ExtResource("3_t4vbm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0.0294056, -0.162851, -0.922079)
 shape = SubResource("CapsuleShape3D_v7oki")
+debug_color = Color(0.96803, 0, 0.470486, 0.42)
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164692, 0.00808311, 1.32632)

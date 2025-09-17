@@ -1,13 +1,15 @@
 extends RigidBody3D
 
-@export var acceleration_force: float = 500.0 # Adjust this value as needed
-var initial_direction: Vector3 # This will be set by the spawner
+@export var acceleration_force: float = 500.0
+var initial_direction: Vector3 
+@onready var player: Node3D = get_tree().get_first_node_in_group("player")
 
 func _physics_process(delta):
 	# Apply a constant force in the initial direction
-	self.apply_central_force(Vector3.FORWARD * acceleration_force)
+	self.apply_central_force(initial_direction * acceleration_force)
 
 func _ready() -> void:
+	initial_direction = -transform.basis.z.normalized()
 	await get_tree().create_timer(10).timeout
 	queue_free()
 
