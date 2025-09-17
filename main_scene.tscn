@@ -46,7 +46,7 @@ point_count = 4
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nfk4m"]
 plane = Plane(0, 5, 0, 0)
 
-[node name="Node3D" type="Node3D"]
+[node name="Mainmenu" type="Node3D"]
 script = ExtResource("1_gyfs4")
 mob_scene = ExtResource("4_d5x1h")
 spawn_interval = 1.0
@@ -79,7 +79,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 curve = SubResource("Curve3D_0f027")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-0.0038909, 0.0083562, -0.999905, -4.65646e-10, 0.999938, 0.00835605, 0.999959, 3.25149e-05, -0.00389068, -94.3062, 12.5158, -98.0593)
+transform = Transform3D(-0.0038909, 0.0083562, -0.999905, -4.65646e-10, 0.999937, 0.00835605, 0.999959, 3.25149e-05, -0.00389068, -94.3062, 12.5158, -98.0593)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.999998, 0.00188849, 0.000121643, -0.000126435, 0.00252934, 0.999997, 0.00188817, -0.999995, 0.00252957, 0, 26.9135, 0)
