@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://5ci081adyho1"]
+[gd_scene load_steps=26 format=4 uid="uid://5ci081adyho1"]
 
 [ext_resource type="Texture2D" uid="uid://kypth6quae0g" path="res://Low Poly Cars Pack 1/Blends/CarTexture.png" id="1_7k104"]
 [ext_resource type="Script" uid="uid://b20my53tpxeg5" path="res://enemy.gd" id="1_qi2p4"]
@@ -7,6 +7,28 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qi2p4"]
 friction = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epg4t"]
+albedo_color = Color(0.754357, 0.442561, 0.296182, 1)
+emission_enabled = true
+emission = Color(0.752941, 0.443137, 0.298039, 1)
+emission_energy_multiplier = 7.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wujgv"]
+roughness = 0.0
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_hb8ge"]
+material = SubResource("StandardMaterial3D_wujgv")
+
+[sub_resource type="Curve" id="Curve_e1ltt"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0254237, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_dxifv"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gyqm"]
 albedo_texture = ExtResource("1_7k104")
@@ -147,6 +169,21 @@ mass = 20.0
 physics_material_override = SubResource("PhysicsMaterial_qi2p4")
 gravity_scale = 2.004
 script = ExtResource("1_qi2p4")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0107145, 3.16808, 0.441392)
+material_override = SubResource("StandardMaterial3D_epg4t")
+transparency = 0.99
+emitting = false
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+mesh = SubResource("SphereMesh_hb8ge")
+gravity = Vector3(0, 0, 0)
+scale_amount_min = 20.0
+scale_amount_max = 20.0
+scale_amount_curve = SubResource("Curve_e1ltt")
+color_ramp = SubResource("Gradient_dxifv")
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(-5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 0, 3.96386, 0)

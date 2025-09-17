@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://b40liyrsac6lj"]
+[gd_scene load_steps=15 format=3 uid="uid://b40liyrsac6lj"]
 
 [ext_resource type="PackedScene" uid="uid://db6dfdvhbf04q" path="res://player.tscn" id="1_0f027"]
 [ext_resource type="Script" uid="uid://dvacgajpxee4i" path="res://main_scene.gd" id="1_gyfs4"]
 [ext_resource type="PackedScene" uid="uid://b2nxxps3b2dg5" path="res://weapon.tscn" id="2_2c62f"]
 [ext_resource type="PackedScene" uid="uid://bwi7dxgrcemrw" path="res://laser_weapon.tscn" id="4_8mm7a"]
 [ext_resource type="PackedScene" uid="uid://5ci081adyho1" path="res://enemy.tscn" id="4_d5x1h"]
+[ext_resource type="Script" uid="uid://cdbawhead2f71" path="res://kill_zone.gd" id="6_hq1ik"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o3jxj"]
 friction = 0.0
@@ -41,6 +42,9 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nfk4m"]
+plane = Plane(0, 5, 0, 0)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_gyfs4")
@@ -87,7 +91,7 @@ directional_shadow_mode = 1
 directional_shadow_fade_start = 0.46
 
 [node name="Weapon" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.5974, 65.396)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 65.396)
 
 [node name="laser_weapon" parent="Weapon" instance=ExtResource("4_8mm7a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.8178, -5.9284, 5.73389)
@@ -103,3 +107,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.91671, -7.35501, 7.04428)
 
 [node name="weapon4" parent="Weapon" instance=ExtResource("2_2c62f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.197, -7.355, -64.984)
+
+[node name="KillZone" type="Area3D" parent="."]
+collision_layer = 15
+collision_mask = 15
+script = ExtResource("6_hq1ik")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0919991, -96.4474, -0.1492)
+shape = SubResource("WorldBoundaryShape3D_nfk4m")

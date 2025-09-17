@@ -3,6 +3,7 @@ extends RigidBody3D
 @export var acceleration_force: float = 500.0
 var initial_direction: Vector3 
 @onready var player: Node3D = get_tree().get_first_node_in_group("player")
+@onready var particle = $CPUParticles3D
 
 func _physics_process(delta):
 	# Apply a constant force in the initial direction
@@ -23,6 +24,8 @@ func on_hit(attack: Attack):
 		hitbox.disabled = true
 		hurtbox.disabled = true
 	
+	particle.emitting = true
+	particle.restart()
 	attack.position.y = 0
 	
 	var dir = (global_transform.origin - attack.position).normalized()

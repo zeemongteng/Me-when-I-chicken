@@ -130,5 +130,4 @@ func on_hit(attack: Attack):
 	_ragdoll.apply_torque_impulse(spin_axis * 50.0)
 	cam.shake(0.1, 3)
 	
-	
 	is_dead = true
