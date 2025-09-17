@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="3D_project"
-run/main_scene="uid://b40liyrsac6lj"
+run/main_scene="uid://c827pagsgayin"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://ctygckqgul2vr"
 
 [filesystem]
 

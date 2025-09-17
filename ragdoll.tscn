@@ -72,7 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00593638, 3.90743, 0.824665
 shape = SubResource("CapsuleShape3D_uytnn")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="CollisionShape3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164692, -0.817736, -0.815169)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164692, -2.59814, -0.151587)
 transparency = 0.5
 randomness = 1.0
 fixed_fps = 60

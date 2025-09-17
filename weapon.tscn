@@ -288,6 +288,7 @@ _data = {
 
 [node name="weapon" type="Node3D"]
 script = ExtResource("1_o2wld")
+turn_speed = 0.5
 
 [node name="Cannon_1" type="Node3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -0.227051, -0.00012207, -1.20837)

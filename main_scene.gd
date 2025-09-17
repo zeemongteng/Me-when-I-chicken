@@ -23,7 +23,6 @@ func _on_mob_timer_timeout():
 	mob_spawn_location.progress_ratio = randf()
 
 	var player_position = $player.position
-
 	
 	var dir = (mob_spawn_location.position - player_position).normalized()
 	dir.y = 0
