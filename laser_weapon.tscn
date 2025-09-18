@@ -302,7 +302,7 @@ _data = {
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -0.227051, -0.00012207, -1.20837)
 
 [node name="GearCannon_1_Base" type="MeshInstance3D" parent="Cannon_1"]
-transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0.0227051, 1.22073e-05, 0.120837)
+transform = Transform3D(100, 0, 0, 0, -0.000361999, 100, 0, -100, -0.000361999, 0.0227051, 1.22073e-05, 0.120837)
 mesh = SubResource("ArrayMesh_32nbg")
 skeleton = NodePath("")
 
@@ -341,7 +341,7 @@ collide_with_bodies = false
 script = ExtResource("1_5b4l8")
 
 [node name="GearCannon_1_Mid" type="MeshInstance3D" parent="Cannon_1"]
-transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0.0227051, 0.108784, 0.120837)
+transform = Transform3D(100, 0, 0, 0, -0.000361999, 100, 0, -100, -0.000361999, 0.0227051, 0.108784, 0.120837)
 mesh = SubResource("ArrayMesh_xxdfn")
 skeleton = NodePath("")
 

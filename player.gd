@@ -18,6 +18,8 @@ class_name Player
 @onready var death_screen = get_tree().root.get_node("Mainmenu/CanvasLayer/TextureRect")
 @onready var flash_ui = get_tree().root.get_node("Mainmenu/CanvasLayer/ColorRect")
 
+var main_menu: PackedScene = load("res://main_menu.tscn")
+
 var charge_time: float = 0.0
 var is_charging: bool = false
 var original_position: Vector3
@@ -30,6 +32,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
+		if Input.is_anything_pressed():
+			get_tree().change_scene_to_packed(main_menu)
 		return
 	
 	if not is_on_floor():
@@ -133,8 +137,8 @@ func on_hit(attack: Attack):
 	_ragdoll.apply_torque_impulse(spin_axis * 50.0)
 	cam.shake(0.1, 3)
 	
-	is_dead = true
-	
 	await get_tree().create_timer(2).timeout
 	death_screen.show_deathscreen()
 	flash_ui.flash(3600, Color.BLACK, 0.6)
+	
+	is_dead = true

@@ -654,6 +654,21 @@ emission_energy_multiplier = 1.66
 material = SubResource("StandardMaterial3D_ix6bv")
 size = Vector3(8.885, 6.673, 0.223)
 
+[sub_resource type="Animation" id="Animation_ix6bv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.076, 1.479, -1.618)]
+}
+
 [sub_resource type="Animation" id="Animation_2urq5"]
 resource_name = "opening"
 length = 2.0
@@ -670,21 +685,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.25, 385.442),
 "update": 2,
 "values": [Vector3(-1.076, 1.479, -1.618), Vector3(1.211, 1.479, -1.618)]
-}
-
-[sub_resource type="Animation" id="Animation_ix6bv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-1.076, 1.479, -1.618)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2kjvi"]

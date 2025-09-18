@@ -125,7 +125,7 @@ shape = SubResource("WorldBoundaryShape3D_nfk4m")
 curve = SubResource("Curve3D_hq1ik")
 
 [node name="WeaponSpawnLocation" type="PathFollow3D" parent="WeaponSpawnPath"]
-transform = Transform3D(0.00129123, -0.000534012, 0.999996, 2.91038e-11, 0.999999, 0.000534011, -0.999996, -6.89504e-07, 0.00129123, 99.5778, -7.87083, -99.5001)
+transform = Transform3D(0.00129123, -0.000534005, 0.999996, 0, 0.999999, 0.000534004, -0.999996, -6.89524e-07, 0.00129123, 99.5778, -7.87083, -99.5001)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
