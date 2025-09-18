@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=4 uid="uid://c827pagsgayin"]
+[gd_scene load_steps=96 format=4 uid="uid://c827pagsgayin"]
 
 [ext_resource type="Texture2D" uid="uid://be4tw1kbgb5ca" path="res://startbutton/start_button_v01_0.png" id="1_04soa"]
 [ext_resource type="PackedScene" uid="uid://cd2kbn2lisg5p" path="res://ragdoll.tscn" id="1_06t4h"]
@@ -693,6 +693,20 @@ _data = {
 &"opening": SubResource("Animation_2urq5")
 }
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2kjvi"]
+bounce = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kjvi"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_kvjq3"]
+material = SubResource("StandardMaterial3D_2kjvi")
+text = "673380283-6
+Pongsapat lebantan"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h1gbt"]
+size = Vector3(1.4791, 0.448242, 0.164978)
+
 [node name="main_menu" type="Node3D"]
 script = ExtResource("1_ix6bv")
 main = ExtResource("2_2kjvi")
@@ -842,5 +856,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_2kjvi")
 }
 autoplay = "opening"
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+transform = Transform3D(0.987688, -0.156434, 0, 0.156434, 0.987688, 0, 0, 0, 1, 0.178307, 4.34973, -2.59206)
+collision_layer = 3
+collision_mask = 3
+mass = 2.352
+physics_material_override = SubResource("PhysicsMaterial_2kjvi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
+mesh = SubResource("TextMesh_kvjq3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00849915, 0.0117188, 0)
+shape = SubResource("BoxShape3D_h1gbt")
 
 [connection signal="start" from="Sketchfab_Scene" to="." method="start_pressed"]
