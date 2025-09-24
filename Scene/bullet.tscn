@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://bhcpkqpgbw26k"]
+
+[ext_resource type="PackedScene" uid="uid://b6whiddemwnhf" path="res://Asset/Model/Bullet/low_poly_bullet.glb" id="1_v7oki"]
+[ext_resource type="Script" uid="uid://7e8l0vya186d" path="res://Script/bullet.gd" id="1_v8qja"]
+[ext_resource type="Script" uid="uid://cpdfmnm7g8xh6" path="res://Script/hitbox.gd" id="3_t4vbm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7oki"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.580392, 0, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v8qja"]
+radius = 1.24123
+height = 6.117
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v7oki"]
+radius = 1.11682
+height = 5.69324
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4vbm"]
+albedo_color = Color(0.643137, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.94902, 0, 0, 1)
+emission_energy_multiplier = 7.02
+
+[sub_resource type="BoxMesh" id="BoxMesh_2b2rl"]
+material = SubResource("StandardMaterial3D_t4vbm")
+
+[sub_resource type="Curve" id="Curve_2b2rl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="bullet" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 4
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+motion_mode = 1
+slide_on_ceiling = false
+wall_min_slide_angle = 3.14159
+floor_stop_on_slope = false
+floor_block_on_wall = false
+safe_margin = 0.01
+script = ExtResource("1_v8qja")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_v7oki")]
+transform = Transform3D(-7.2998e-06, 0, 167, 0, 167, 0, -167, 0, -7.2998e-06, 0, 0, 0)
+
+[node name="Object_5" parent="Sketchfab_Scene/Sketchfab_model/root/GLTF_SceneRootNode/Zylinder_2" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_v7oki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.91068e-15, -4.37114e-08, 1, -0.999999, -4.37114e-08, 0, 4.37114e-08, -0.999999, -4.37114e-08, -0.0135695, 0, -1.04301)
+shape = SubResource("CapsuleShape3D_v8qja")
+
+[node name="Hitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00977182, 0, 0)
+script = ExtResource("3_t4vbm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0.0294056, -0.162851, -0.922079)
+shape = SubResource("CapsuleShape3D_v7oki")
+debug_color = Color(0.96803, 0, 0.470486, 0.42)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164692, 0.00808311, 1.32632)
+transparency = 0.5
+randomness = 1.0
+fixed_fps = 60
+mesh = SubResource("BoxMesh_2b2rl")
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_2b2rl")
+
+[editable path="Sketchfab_Scene"]

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c8ygit57x6ik8"
+path="res://.godot/imported/SimpleCar.obj-3259e6e45ce296612d2b4bd94d995f9b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SimpleCar.obj-3259e6e45ce296612d2b4bd94d995f9b.mesh"]
+
+source_file="res://Asset/Model/Enemy/Low Poly Cars Pack 2/OBJ/SimpleCar.obj"
+dest_files=["res://.godot/imported/SimpleCar.obj-3259e6e45ce296612d2b4bd94d995f9b.mesh", "res://.godot/imported/SimpleCar.obj-3259e6e45ce296612d2b4bd94d995f9b.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
