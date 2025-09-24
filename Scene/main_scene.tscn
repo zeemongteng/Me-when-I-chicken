@@ -88,7 +88,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 curve = SubResource("Curve3D_0f027")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-0.003890895, 0.008356155, -0.99989927, -4.6564572e-10, 0.9999322, 0.008356006, 0.999959, 3.251472e-05, -0.0038906627, -94.3062, 12.5158, -98.0593)
+transform = Transform3D(-0.003890895, 0.008356153, -0.999899, -4.6564572e-10, 0.999932, 0.008356004, 0.999959, 3.2514712e-05, -0.0038906618, -94.3062, 12.5158, -98.0593)
 
 [node name="WeaponSpawnPath" type="Path3D" parent="."]
 curve = SubResource("Curve3D_hq1ik")
@@ -129,4 +129,13 @@ stretch_mode = 3
 script = ExtResource("9_wr18j")
 
 [node name="Island" parent="." instance=ExtResource("5_j1xvy")]
-transform = Transform3D(0.9999619, -0.008726535, 0, 0.008724927, 0.9997776, -0.019197444, 0.00016752716, 0.019196711, 0.9998157, 24.054169, 3.7321663, 0)
+transform = Transform3D(0.76997066, -0.006719433, 1.1204549e-11, 0.006718194, 0.76982874, -0.014782031, 0.00012899592, 0.014781468, 0.76985806, 0.060005188, 3.7321663, 0)
+
+[node name="Island4" parent="." instance=ExtResource("5_j1xvy")]
+transform = Transform3D(0.76997066, -0.006719433, 1.1204549e-11, 0.006718194, 0.76982874, -0.014782031, 0.00012899592, 0.014781468, 0.76985806, 33.3245, 3.7321663, 13.419376)
+
+[node name="Island2" parent="." instance=ExtResource("5_j1xvy")]
+transform = Transform3D(0.09637493, -0.015507081, -0.76378745, 0.006718193, 0.76982874, -0.01478203, 0.7639153, -0.0048138383, 0.096488796, 8.511726, 3.7321663, 8.417458)
+
+[node name="Island3" parent="." instance=ExtResource("5_j1xvy")]
+transform = Transform3D(0.09637493, -0.015507081, -0.76378745, 0.006718193, 0.76982874, -0.01478203, 0.7639153, -0.0048138383, 0.096488796, -20.507698, 3.144188, 35.394547)

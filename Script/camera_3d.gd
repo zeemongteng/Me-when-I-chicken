@@ -7,6 +7,9 @@ extends Camera3D
 @export var shake_strength: float = 0.3
 @export var shake_duration: float = 0.25
 @export var transition_speed: float = 3.0 # speed of cinematic transition
+@export var scroll_speed: float = 2.0      # how fast the camera moves per scroll
+@export var min_y_offset: float = 10.0     # optional clamp limits
+@export var max_y_offset: float = 80.0
 
 var target: Node3D
 var _previous_target: Node3D
@@ -17,6 +20,16 @@ func shake(duration: float, strength: float) -> void:
 	shake_duration = duration
 	shake_strength = strength
 	_shake_time = shake_duration
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			follow_offset.y += scroll_speed
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			follow_offset.y -= scroll_speed
+
+		# Optional clamp to keep the camera within a reasonable height range
+		follow_offset.y = clamp(follow_offset.y, min_y_offset, max_y_offset)
 
 func _process(delta: float) -> void:
 	# Determine current target

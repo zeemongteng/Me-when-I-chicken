@@ -50,6 +50,5 @@ func spawn_weapon():
 	add_child(weapon)
 
 func _process(_delta: float) -> void:
-	
 	if Input.is_action_just_pressed("ui_button_p"):
 		spawn_weapon()
