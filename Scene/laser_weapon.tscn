@@ -1,11 +1,11 @@
-[gd_scene load_steps=19 format=4 uid="uid://bwi7dxgrcemrw"]
+[gd_scene load_steps=24 format=4 uid="uid://bwi7dxgrcemrw"]
 
 [ext_resource type="Script" uid="uid://bjdm6657x8agq" path="res://Script/raycastHitbox.gd" id="1_5b4l8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d3t7e"]
 resource_name = "Dark"
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.329219, 0.192278, 0.166638, 1)
+albedo_color = Color(0.89411765, 0.1764706, 0.17254902, 1)
 emission_enabled = true
 emission = Color(0.366655, 0.216371, 0.188233, 1)
 emission_energy_multiplier = 0.0
@@ -13,7 +13,7 @@ emission_energy_multiplier = 0.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_np8sw"]
 resource_name = "Light"
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.46894, 0.289395, 0.265202, 1)
+albedo_color = Color(0.47058824, 0, 0.26666668, 1)
 emission_enabled = true
 emission = Color(0.51999, 0.322951, 0.296401, 1)
 emission_energy_multiplier = 0.0
@@ -69,6 +69,13 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_n4cbu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwwut"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_40rss"]
+material = SubResource("StandardMaterial3D_rwwut")
+size = Vector3(15, 20, 250)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5b4l8"]
 albedo_color = Color(1, 0, 0, 1)
@@ -296,6 +303,68 @@ _data = {
 &"rotate": SubResource("Animation_ukxeg")
 }
 
+[sub_resource type="Animation" id="Animation_rwwut"]
+resource_name = "MovingUP"
+length = 2.0000017
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cannon_1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.4837588, 2.0000017),
+"transitions": PackedFloat32Array(0.223, 1),
+"update": 0,
+"values": [Vector3(-0.227, -25, -1.208), Vector3(-0.227051, -0.00012207, -1.20837)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cannon_1/Pivot/WarningQue:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.4841704, 2.0000017),
+"transitions": PackedFloat32Array(0.223, 1),
+"update": 0,
+"values": [Vector3(0.00022700008, 0.024349693, 0.12045622), Vector3(0, 0, 0.12)]
+}
+
+[sub_resource type="Animation" id="Animation_40rss"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cannon_1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.227051, -0.00012207, -1.20837)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cannon_1/Pivot/WarningQue:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.00022700008, 0.024349693, 0.12045622)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lame3"]
+_data = {
+&"MovingUP": SubResource("Animation_rwwut"),
+&"RESET": SubResource("Animation_40rss")
+}
+
 [node name="laser_weapon" type="Node3D"]
 
 [node name="Cannon_1" type="Node3D" parent="."]
@@ -308,6 +377,13 @@ skeleton = NodePath("")
 
 [node name="Pivot" type="Node3D" parent="Cannon_1"]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 1.093, 0)
+
+[node name="WarningQue" type="MeshInstance3D" parent="Cannon_1/Pivot"]
+transform = Transform3D(0.0009999993, 0, 0, 0, 0.0009999993, 0, 0, 0, 0.0009999993, 0.00022700008, 0.024349693, 0.12045622)
+transparency = 0.95
+cast_shadow = 0
+mesh = SubResource("BoxMesh_40rss")
+skeleton = NodePath("../../../..")
 
 [node name="Pointer" type="MeshInstance3D" parent="Cannon_1/Pivot"]
 transform = Transform3D(-0.01, -1.74845e-09, 8.74227e-10, -8.74228e-10, 4.37114e-10, -0.00999997, 1.74846e-09, -0.00999997, -4.37114e-10, -0.00695862, 0.000937997, 0.282876)
@@ -356,3 +432,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_vr7c4")
 }
 autoplay = "rotate"
+
+[node name="Intro" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lame3")
+}
+autoplay = "MovingUP"

@@ -5,13 +5,13 @@ class_name Canon
 @export var turn_speed: float = 0.8
 @export var bullet_speed: float = 100
 
-@onready var bulletspawner: Node3D = $Cannon_1/Pivot/Cannon_1_Gun/BulletSpawner
-@onready var pivot: Node3D = $Cannon_1/Pivot
+@onready var bulletspawner: Node3D = $IntroPivot/Cannon_1/Pivot/Cannon_1_Gun/BulletSpawner
+@onready var pivot: Node3D = $IntroPivot/Cannon_1/Pivot
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var player: Node3D = get_tree().get_first_node_in_group("player")
 @onready var bullet_scene: PackedScene = preload("res://Scene/bullet.tscn")
 @onready var shoot_timer: Timer = Timer.new()
-
+  
 func _ready() -> void:
 	shoot_timer.wait_time = shoot_interval
 	shoot_timer.one_shot = false
