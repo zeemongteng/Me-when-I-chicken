@@ -13,6 +13,7 @@ class_name Player
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var effect_anim: AnimationPlayer = $EffectPlayer
 @onready var mesh: Node3D = $Pivot
+@onready var glowingMesh = $Pivot/Chicken/GlowingModel
 @onready var explosion = $Particles
 @onready var ragdoll = preload("res://Scene/ragdoll.tscn").instantiate()
 @onready var death_screen = get_tree().root.get_node("Mainmenu/CanvasLayer/TextureRect")
@@ -23,7 +24,6 @@ var main_menu: PackedScene = load("res://Scene/main_menu.tscn")
 var charge_time: float = 0.0
 var is_charging: bool = false
 var original_position: Vector3
-var is_shaking: bool = false
 var previous_y_velocity: float = 0.0
 var is_dead := false
 
@@ -41,31 +41,24 @@ func _physics_process(delta: float) -> void:
 	
 	previous_y_velocity = velocity.y
 	
-	# --- Jump charging ---
 	if is_on_floor():
 		if Input.is_action_pressed("ui_accept"):
-			# Start charging
 			if not is_charging:
 				is_charging = true
-				_play_effect_anim_once("charge")
-				start_shake()
 			charge_time = min(charge_time + delta, MAX_CHARGE_TIME)
+			glowingMesh.transparency = max(glowingMesh.transparency - delta, 0)
 
 		elif Input.is_action_just_released("ui_accept") and is_charging:
-			_play_effect_anim_once("RESET")
+			is_charging = false
+			glowingMesh.transparency = 1 #invis
 			var t = charge_time / MAX_CHARGE_TIME
 			var jump_force = lerp(BASE_JUMP, MAX_JUMP, t)
 			velocity.y = jump_force
-
-			# Reset charging state
-			is_charging = false
 			charge_time = 0.0
-			stop_shake()
-			_play_anim("jump")
+			anim.play("jump")
 	else:
 		is_charging = false
-		charge_time = 0.0
-		stop_shake()
+		charge_time = 0.0 
 
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -82,42 +75,20 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	if not is_on_floor():
-		pass # keep jump anim
-	elif direction != Vector3.ZERO and not is_charging:
-		_play_anim("walk")
-	elif not is_charging:
-		anim.stop() 
+	if is_on_floor():
+		if !velocity.x && !velocity.z:
+			anim.play("idle")
+		else: 
+			if velocity.y:
+				anim.play("jump")
+			else:
+				anim.play("walk")
 
-	if is_shaking:
-		mesh.transform.origin = original_position + Vector3(
-			randf_range(-SHAKE_STRENGTH, SHAKE_STRENGTH),
-			randf_range(-SHAKE_STRENGTH, SHAKE_STRENGTH),
-			randf_range(-SHAKE_STRENGTH, SHAKE_STRENGTH)
-		)
-	else:
-		mesh.transform.origin = original_position
+	detect_charge()
 	
 	if is_on_floor() and previous_y_velocity < -FALL_TRESHOLD:
 		explosion.emitting = true
 		explosion.restart()
-
-
-func _play_anim(name: String) -> void:
-	if anim.current_animation != name or not anim.is_playing():
-		anim.play(name)
-
-
-func _play_effect_anim_once(name: String) -> void:
-	if effect_anim.current_animation != name or not effect_anim.is_playing():
-		effect_anim.play(name, 0.0, 1.0, false)
-
-func start_shake():
-	is_shaking = true
-
-func stop_shake():
-	is_shaking = false
-	mesh.transform.origin = original_position
 
 func on_hit(attack: Attack):
 	mesh.visible = false
@@ -142,3 +113,13 @@ func on_hit(attack: Attack):
 	flash_ui.flash(3600, Color.BLACK, 0.6)
 	
 	is_dead = true
+
+func detect_charge():
+	if is_charging:
+		mesh.transform.origin = original_position + Vector3(
+			randf_range(-SHAKE_STRENGTH, SHAKE_STRENGTH),
+			randf_range(-SHAKE_STRENGTH, SHAKE_STRENGTH),
+			randf_range(-SHAKE_STRENGTH, SHAKE_STRENGTH)
+		)
+	else:
+		mesh.transform.origin = original_position

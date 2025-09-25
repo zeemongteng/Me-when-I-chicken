@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="3D_project"
+config/name="chicken"
 run/main_scene="uid://c827pagsgayin"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="uid://c6pb113iwginl"
