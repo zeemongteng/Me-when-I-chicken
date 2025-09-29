@@ -1,54 +1,70 @@
 extends Node3D
 
 @export var mob_scene: PackedScene
-@export var spawn_interval: float = 3.0 
+@export var spawn_interval_mob: float = 3.0
 @export var weapon_scenes: Array[PackedScene]
+@export var spawn_interval_weapon: float = 5.0
 
-@onready var light = $DirectionalLight3D
+@onready var player: Node3D = $player
+@onready var mob_spawn_path: PathFollow3D = $SpawnPath/SpawnLocation
+@onready var weapon_spawn_path: PathFollow3D = $WeaponSpawnPath/WeaponSpawnLocation
 
-var _spawn_timer: Timer
+var mob_timer: Timer
+var weapon_timer: Timer
+
 
 func _ready() -> void:
-	# Create and configure timer
-	_spawn_timer = Timer.new()
-	_spawn_timer.wait_time = spawn_interval
-	_spawn_timer.one_shot = false
-	_spawn_timer.autostart = true
-	add_child(_spawn_timer)
+	mob_timer = create_timer(spawn_interval_mob, _on_mob_timer_timeout)
+	weapon_timer = create_timer(spawn_interval_weapon, _on_weapon_timer_timeout)
 
-	# Connect the timeout signal
-	_spawn_timer.timeout.connect(_on_mob_timer_timeout)
 
-func _on_mob_timer_timeout():
+func create_timer(interval: float, callback: Callable) -> Timer:
+	var timer := Timer.new()
+	timer.wait_time = interval
+	timer.one_shot = false
+	timer.autostart = true
+	add_child(timer)
+	timer.timeout.connect(callback)
+	return timer
+
+
+func _on_mob_timer_timeout() -> void:
+	if not mob_scene or not player:
+		return
+	
 	var mob = mob_scene.instantiate()
 	
-	var mob_spawn_location = $SpawnPath/SpawnLocation
-	mob_spawn_location.progress_ratio = randf()
+	# Random spawn point along path
+	mob_spawn_path.progress_ratio = randf()
+	var spawn_pos = mob_spawn_path.position
 
-	var player_position = $player.position
-	
-	var dir = (mob_spawn_location.position - player_position).normalized()
+	# Direction from spawn toward player
+	var dir = (spawn_pos - player.position).normalized()
 	dir.y = 0
-	
-	mob.look_at_from_position(mob_spawn_location.position, dir, Vector3.UP)
 
-	mob.linear_velocity = (-dir * 60)
+	mob.look_at_from_position(spawn_pos, player.position, Vector3.UP)
+	if mob.has_method("set_linear_velocity"):
+		mob.set_linear_velocity(-dir * 60) # in case it's RigidBody3D
+	elif "linear_velocity" in mob:
+		mob.linear_velocity = -dir * 60
 	
 	add_child(mob)
 
-func spawn_weapon():
-	var idx: int = randi() % weapon_scenes.size()
-	var random_weapon_scene: PackedScene = weapon_scenes[idx]
-	var weapon = random_weapon_scene.instantiate()
 
-	var pf: PathFollow3D = $WeaponSpawnPath/WeaponSpawnLocation
-	pf.progress_ratio = randf()
-	var spawn_pos: Vector3 = pf.global_transform.origin
-	var wt: Transform3D = weapon.global_transform
+func _on_weapon_timer_timeout() -> void:
+	if weapon_scenes.is_empty():
+		return
+	
+	var idx = randi() % weapon_scenes.size()
+	var weapon_scene: PackedScene = weapon_scenes[idx]
+	var weapon = weapon_scene.instantiate()
+
+
+	weapon_spawn_path.progress_ratio = randf()
+	var spawn_pos = weapon_spawn_path.global_position
+
+	var wt = weapon.global_transform
 	wt.origin = spawn_pos
 	weapon.global_transform = wt
+	
 	add_child(weapon)
-
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_button_p"):
-		spawn_weapon()
